@@ -46,11 +46,11 @@ export default function Navbar() {
                     position: "fixed",
                     top: 0, left: 0, right: 0,
                     zIndex: 100,
-                    padding: scrolled ? "12px 0" : "18px 0",
-                    background: scrolled ? "rgba(5,8,16,0.85)" : "transparent",
-                    backdropFilter: scrolled ? "blur(20px)" : "none",
-                    borderBottom: scrolled ? "1px solid rgba(255,255,255,0.08)" : "none",
+                    padding: "18px 0",
+                    background: "transparent",
                     transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)",
+                    transform: scrolled ? "translateY(-100%)" : "translateY(0)",
+                    pointerEvents: scrolled ? "none" : "auto",
                 }}
             >
                 <div className="et-container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>

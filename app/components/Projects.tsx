@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const projects = [
     {
@@ -11,6 +12,8 @@ const projects = [
         tags: ["AI Generation", "Automation", "Multi-Channel", "Content System"],
         status: "In Development",
         statusClass: "in-dev",
+        link: "/projects/ai-content-factory",
+        btnText: "Watch How It Works",
     },
     {
         number: "02",
@@ -20,6 +23,8 @@ const projects = [
         tags: ["Personal Cloud", "AI Integration", "Infrastructure", "Self-Hosted"],
         status: "In Development",
         statusClass: "in-dev",
+        link: "/projects/home-server",
+        btnText: "Explore System",
     },
     {
         number: "03",
@@ -29,6 +34,8 @@ const projects = [
         tags: ["Solar Energy", "Smart Home", "IoT", "Renewable Tech"],
         status: "Future Plan",
         statusClass: "planned",
+        link: "/projects/solar-smart-home",
+        btnText: "See Energy Flow",
     },
 ];
 
@@ -67,13 +74,14 @@ export default function Projects() {
                                 borderRadius: "var(--radius-xl)",
                                 padding: "36px 28px 28px",
                                 overflow: "hidden",
-                                cursor: "default",
+                                display: "flex",
+                                flexDirection: "column",
                                 transition: "border-color 0.35s, transform 0.35s, box-shadow 0.35s",
                             }}
                             onMouseEnter={(e) => {
-                                e.currentTarget.style.borderColor = "rgba(99,102,241,0.4)";
+                                e.currentTarget.style.borderColor = "rgba(247,255,114,0.4)";
                                 e.currentTarget.style.transform = "translateY(-6px)";
-                                e.currentTarget.style.boxShadow = "0 20px 60px rgba(0,0,0,0.4)";
+                                e.currentTarget.style.boxShadow = "var(--shadow-glow)";
                                 const glow = e.currentTarget.querySelector(".proj-glow") as HTMLElement;
                                 if (glow) glow.style.opacity = "0.12";
                             }}
@@ -112,7 +120,7 @@ export default function Projects() {
                                 {proj.number}
                             </div>
 
-                            <div style={{ position: "relative", zIndex: 1 }}>
+                            <div style={{ position: "relative", zIndex: 1, flexGrow: 1 }}>
                                 <div style={{ fontSize: "2.2rem", marginBottom: "16px" }}>{proj.icon}</div>
 
                                 <h3 style={{
@@ -146,18 +154,26 @@ export default function Projects() {
                                 </div>
 
                                 {/* Status badge */}
-                                <span style={{
-                                    display: "inline-block",
-                                    padding: "4px 12px",
-                                    borderRadius: "100px",
-                                    fontSize: "0.72rem",
-                                    fontWeight: 600,
-                                    ...(proj.statusClass === "in-dev"
-                                        ? { background: "rgba(99,102,241,0.15)", color: "var(--clr-primary-light)", border: "1px solid rgba(99,102,241,0.25)" }
-                                        : { background: "rgba(168,85,247,0.1)", color: "#c084fc", border: "1px solid rgba(168,85,247,0.25)" }),
-                                }}>
-                                    {proj.status}
-                                </span>
+                                <div style={{ marginBottom: "20px" }}>
+                                    <span style={{
+                                        display: "inline-block",
+                                        padding: "4px 12px",
+                                        borderRadius: "100px",
+                                        fontSize: "0.72rem",
+                                        fontWeight: 600,
+                                        ...(proj.statusClass === "in-dev"
+                                            ? { background: "rgba(247,255,114,0.15)", color: "var(--clr-primary-light)", border: "1px solid rgba(247,255,114,0.25)" }
+                                            : { background: "rgba(255,255,255,0.1)", color: "#fff", border: "1px solid rgba(255,255,255,0.25)" }),
+                                    }}>
+                                        {proj.status}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div style={{ position: "relative", zIndex: 1, marginTop: "auto", paddingTop: "1rem" }}>
+                                <Link href={proj.link} className="et-btn-ghost" style={{ width: "100%", justifyContent: "center", fontSize: "0.85rem", padding: "10px 16px" }}>
+                                    {proj.btnText} →
+                                </Link>
                             </div>
                         </motion.div>
                     ))}

@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const contactLinks = [
-    { icon: "✉️", label: "Email Me", href: "mailto:your@email.com" },
-    { icon: "💼", label: "LinkedIn", href: "https://linkedin.com" },
-    { icon: "🐙", label: "GitHub", href: "https://github.com" },
+    { icon: "✉️", label: "Email Me", href: "https://mail.google.com/mail/?view=cm&fs=1&to=edwinmoothedan2000@gmail.com" },
+    { icon: "💼", label: "LinkedIn", href: "https://linkedin.com/in/edwin-thomas" },
+    { icon: "🐙", label: "GitHub", href: "https://github.com/edwinthomas-123" },
 ];
 
 export default function Contact() {
@@ -123,7 +123,7 @@ export default function Contact() {
                             <p style={{ color: "var(--clr-text-muted)", fontSize: "0.9rem", lineHeight: "1.6", marginBottom: "28px" }}>
                                 Whether it&apos;s AI systems, networking infrastructure, or digital ecosystems — let&apos;s create something extraordinary together.
                             </p>
-                            <a href="mailto:your@email.com" className="et-btn-primary">
+                            <a href="https://wa.me/918590399020" target="_blank" rel="noopener noreferrer" className="et-btn-primary">
                                 Say Hello
                             </a>
                         </div>

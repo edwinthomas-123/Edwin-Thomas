@@ -43,12 +43,12 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
             {/* ── Section 1: Center – Name & Title ── */}
             <motion.div
                 style={{ opacity: op1, y: y1 }}
-                className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+                className="absolute inset-0 flex flex-col justify-center items-start text-left px-8 sm:px-20 lg:px-36"
             >
-                <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-5 font-medium">
+                <p className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-white/40 mb-3 font-medium">
                     Welcome to my world
                 </p>
-                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-none text-white drop-shadow-2xl">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-white drop-shadow-2xl">
                     Edwin
                     <br />
                     <span
@@ -61,7 +61,7 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
                         Thomas
                     </span>
                 </h1>
-                <p className="mt-6 text-lg sm:text-xl font-light text-white/60 tracking-widest uppercase">
+                <p className="mt-4 text-sm sm:text-base font-light text-white/60 tracking-widest uppercase">
                     Creative Developer
                 </p>
             </motion.div>
@@ -71,10 +71,10 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
                 style={{ opacity: op2, y: y2 }}
                 className="absolute inset-0 flex flex-col justify-center px-8 sm:px-20 lg:px-36"
             >
-                <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-4 font-medium">
+                <p className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-white/40 mb-4 font-medium">
                     What I do
                 </p>
-                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight max-w-xl drop-shadow-2xl">
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight max-w-xl drop-shadow-2xl">
                     I build{" "}
                     <span
                         style={{
@@ -88,7 +88,7 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
                     <br />
                     experiences.
                 </h2>
-                <p className="mt-5 text-base sm:text-lg text-white/50 max-w-sm font-light leading-relaxed">
+                <p className="mt-4 text-sm sm:text-base text-white/50 max-w-sm font-light leading-relaxed">
                     AI automation · infrastructure · scalable systems
                 </p>
             </motion.div>
@@ -96,12 +96,12 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
             {/* ── Section 3: Right – Design + Engineering ── */}
             <motion.div
                 style={{ opacity: op3, y: y3 }}
-                className="absolute inset-0 flex flex-col justify-center items-end px-8 sm:px-20 lg:px-36 text-right"
+                className="absolute inset-0 flex flex-col justify-center pt-[25vh] items-end px-8 sm:px-20 lg:px-36 text-right"
             >
-                <p className="text-xs tracking-[0.4em] uppercase text-white/40 mb-4 font-medium">
+                <p className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-white/40 mb-4 font-medium">
                     My approach
                 </p>
-                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight max-w-xl drop-shadow-2xl">
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight max-w-xl drop-shadow-2xl">
                     Bridging{" "}
                     <span
                         style={{
@@ -114,7 +114,7 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
                     </span>
                     <br />& engineering.
                 </h2>
-                <p className="mt-5 text-base sm:text-lg text-white/50 max-w-sm font-light leading-relaxed">
+                <p className="mt-4 text-sm sm:text-base text-white/50 max-w-sm font-light leading-relaxed">
                     Intelligent ecosystems that think, learn, and scale autonomously.
                 </p>
             </motion.div>

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import Overlay from "./Overlay";
 
-const TOTAL_FRAMES = 84;
+const TOTAL_FRAMES = 192;
 
 function getFrameUrl(index: number): string {
     const padded = String(index).padStart(2, "0");
