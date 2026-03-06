@@ -73,28 +73,48 @@ export default function ExplainerPage({ slug }: { slug: string }) {
     return (
         <div ref={containerRef} style={{ background: "var(--clr-bg)", minHeight: "100vh", position: "relative" }}>
 
-            {/* Nav Back Header */}
-            <div style={{ position: "fixed", top: 0, width: "100%", zIndex: 50, background: "rgba(19, 20, 24, 0.8)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--clr-border)" }}>
-                <div className="et-container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", height: "80px" }}>
-                    <Link href="/#projects" style={{ display: "flex", alignItems: "center", gap: "8px", color: "var(--clr-text-muted)", textDecoration: "none", fontWeight: 600, transition: "color 0.2s" }}
-                        onMouseEnter={e => e.currentTarget.style.color = "var(--clr-primary)"}
-                        onMouseLeave={e => e.currentTarget.style.color = "var(--clr-text-muted)"}>
-                        <LucideIcons.ArrowLeft size={18} /> Back to Portfolio
-                    </Link>
-                    <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--clr-primary-light)", letterSpacing: "2px", textTransform: "uppercase" }}>
-                        Digital Explainer
-                    </div>
-                </div>
-            </div>
+            {/* Floating Back Button */}
+            <Link href="/#projects"
+                style={{
+                    position: "fixed",
+                    top: "30px",
+                    left: "30px",
+                    zIndex: 50,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "48px",
+                    height: "48px",
+                    background: "rgba(20, 20, 25, 0.6)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid rgba(247, 255, 114, 0.2)",
+                    borderRadius: "50%",
+                    color: "var(--clr-text-muted)",
+                    textDecoration: "none",
+                    transition: "all 0.3s ease",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+                }}
+                onMouseEnter={e => {
+                    e.currentTarget.style.color = "var(--clr-primary)";
+                    e.currentTarget.style.transform = "scale(1.1)";
+                    e.currentTarget.style.borderColor = "var(--clr-primary)";
+                }}
+                onMouseLeave={e => {
+                    e.currentTarget.style.color = "var(--clr-text-muted)";
+                    e.currentTarget.style.transform = "scale(1)";
+                    e.currentTarget.style.borderColor = "rgba(247, 255, 114, 0.2)";
+                }}>
+                <LucideIcons.ArrowLeft size={24} />
+            </Link>
 
             {/* Progress Bar */}
             <motion.div style={{
-                position: "fixed", top: "80px", left: 0, right: 0, height: "4px",
+                position: "fixed", top: 0, left: 0, right: 0, height: "4px",
                 background: "var(--grad-main)", originX: 0, scaleX: scrollYProgress, zIndex: 51,
                 boxShadow: "0 0 10px var(--clr-primary)"
             }} />
 
-            <div className="et-container" style={{ paddingTop: "140px", paddingBottom: "100px" }}>
+            <div className="et-container" style={{ paddingTop: "80px", paddingBottom: "100px" }}>
 
                 {/* Hero Section */}
                 <header style={{ textAlign: "center", marginBottom: "100px" }}>
