@@ -138,9 +138,7 @@ export default function Contact() {
                         ET<span style={{ color: "var(--clr-primary)" }}>.</span>
                     </div>
                     <p style={{ color: "var(--clr-text-dim)", fontSize: "0.85rem" }}>Designed &amp; Built by Edwin Thomas · 2026</p>
-                    <p style={{ color: "var(--clr-text-dim)", fontSize: "0.78rem", fontStyle: "italic", marginTop: "4px" }}>
-                        Breaking gravity, one system at a time.
-                    </p>
+
                 </div>
             </div>
 
