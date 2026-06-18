@@ -1,43 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-
-const projects = [
-    {
-        number: "01",
-        icon: "🏭",
-        title: "AI Content Factory",
-        desc: "A fully automated multi-niche content creation system with retention-optimized AI episodic generation and autonomous publishing workflows across multiple channels.",
-        tags: ["AI Generation", "Automation", "Multi-Channel", "Content System"],
-        status: "In Development",
-        statusClass: "in-dev",
-        link: "/projects/ai-content-factory",
-        btnText: "Watch How It Works",
-    },
-    {
-        number: "02",
-        icon: "🏠",
-        title: "Home Server Ecosystem",
-        desc: "A personal cloud system integrating AI automation, content generation engines, and a scalable infrastructure roadmap for 24/7 autonomous operation.",
-        tags: ["Personal Cloud", "AI Integration", "Infrastructure", "Self-Hosted"],
-        status: "In Development",
-        statusClass: "in-dev",
-        link: "/projects/home-server",
-        btnText: "Explore System",
-    },
-    {
-        number: "03",
-        icon: "☀️",
-        title: "Off-Grid Solar Smart Home",
-        desc: "A two-floor solar-powered smart home system with lithium battery optimization, energy-efficient appliance planning, and intelligent power distribution management.",
-        tags: ["Solar Energy", "Smart Home", "IoT", "Renewable Tech"],
-        status: "Future Plan",
-        statusClass: "planned",
-        link: "/projects/solar-smart-home",
-        btnText: "See Energy Flow",
-    },
-];
+import { useLanguage } from "./LanguageContext";
 
 const cardVariants = {
     hidden: { opacity: 0, y: 36 },
@@ -49,17 +13,76 @@ const cardVariants = {
 };
 
 export default function Projects() {
+    const { t } = useLanguage();
+
+    const projectsList = [
+        {
+            number: "01",
+            icon: "🍽️",
+            title: t.projects.proj1.title,
+            desc: t.projects.proj1.desc,
+            tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+            status: t.projects.statusCompleted,
+            statusClass: "completed",
+            features: ["Mobile Responsive UI", "Business presentation layout", "Contact Form integration", "Fast load optimizations"],
+            links: [
+                { label: t.projects.liveDemo, href: "https://bake-and-bite.vercel.app/" },
+            ],
+        },
+        {
+            number: "02",
+            icon: "💼",
+            title: t.projects.proj2.title,
+            desc: t.projects.proj2.desc,
+            tags: ["Next.js", "Tailwind CSS", "Framer Motion", "Localization"],
+            status: t.projects.statusCompleted,
+            statusClass: "completed",
+            features: ["Dynamic i18n Switching", "Scroll Canvas integration", "Tailwind responsive styling", "Docker ready"],
+            links: [
+                { label: "GitHub", href: "https://github.com" },
+                { label: t.projects.liveDemo, href: "#" },
+            ],
+        },
+        {
+            number: "03",
+            icon: "⚙️",
+            title: t.projects.proj3.title,
+            desc: t.projects.proj3.desc,
+            tags: ["AI Integration", "Workflow Automation", "API Integration"],
+            status: t.projects.statusInDev,
+            statusClass: "in-dev",
+            features: [t.projects.proj3.workflow, "API error handling", "Scheduled tasks execution", "Workflow logging dashboard"],
+            links: [
+                { label: "GitHub", href: "https://github.com" },
+            ],
+        },
+        {
+            number: "04",
+            icon: "🏠",
+            title: t.projects.proj4.title,
+            desc: t.projects.proj4.desc,
+            tags: ["Docker", "Linux (Debian)", "Self-Hosted", "Backups"],
+            status: t.projects.statusPlanned,
+            statusClass: "planned",
+            features: ["Containerized apps orchestration", "Nginx Reverse Proxy & SSL Setup", "Automated cron backups", "Local model hosting ready"],
+            links: [],
+        },
+    ];
+
     return (
         <section className="et-section" id="projects">
             <div className="et-container">
-                <div className="et-section-label">What I&apos;m Building</div>
+                <div className="et-section-label">{t.projects.label}</div>
                 <h2 className="et-section-title">
-                    Major <span className="et-gradient-text">Projects</span>
+                    {t.projects.title.split(" ").slice(0, 1).join(" ")}{" "}
+                    <span className="et-gradient-text">
+                        {t.projects.title.split(" ").slice(1).join(" ")}
+                    </span>
                 </h2>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}
                     className="projects-grid-responsive">
-                    {projects.map((proj, i) => (
+                    {projectsList.map((proj, i) => (
                         <motion.div
                             key={proj.number}
                             custom={i}
@@ -72,18 +95,18 @@ export default function Projects() {
                                 background: "var(--clr-surface)",
                                 border: "1px solid var(--clr-border)",
                                 borderRadius: "var(--radius-xl)",
-                                padding: "36px 28px 28px",
+                                padding: "32px 24px",
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
                                 transition: "border-color 0.35s, transform 0.35s, box-shadow 0.35s",
                             }}
                             onMouseEnter={(e) => {
-                                e.currentTarget.style.borderColor = "rgba(247,255,114,0.4)";
-                                e.currentTarget.style.transform = "translateY(-6px)";
+                                e.currentTarget.style.borderColor = "rgba(99, 102, 241, 0.4)";
+                                e.currentTarget.style.transform = "translateY(-4px)";
                                 e.currentTarget.style.boxShadow = "var(--shadow-glow)";
                                 const glow = e.currentTarget.querySelector(".proj-glow") as HTMLElement;
-                                if (glow) glow.style.opacity = "0.12";
+                                if (glow) glow.style.opacity = "0.08";
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.borderColor = "var(--clr-border)";
@@ -121,59 +144,101 @@ export default function Projects() {
                             </div>
 
                             <div style={{ position: "relative", zIndex: 1, flexGrow: 1 }}>
-                                <div style={{ fontSize: "2.2rem", marginBottom: "16px" }}>{proj.icon}</div>
+                                <div style={{ fontSize: "2rem", marginBottom: "12px" }}>{proj.icon}</div>
 
                                 <h3 style={{
                                     fontFamily: "var(--font-main)",
-                                    fontSize: "1.2rem",
+                                    fontSize: "1.25rem",
                                     fontWeight: 700,
-                                    marginBottom: "12px",
+                                    marginBottom: "8px",
                                     lineHeight: "1.3",
                                     color: "var(--clr-text)",
                                 }}>
                                     {proj.title}
                                 </h3>
 
-                                <p style={{ fontSize: "0.88rem", color: "var(--clr-text-muted)", lineHeight: "1.65", marginBottom: "20px" }}>
+                                <p style={{ fontSize: "0.85rem", color: "var(--clr-text-muted)", lineHeight: "1.6", marginBottom: "16px" }}>
                                     {proj.desc}
                                 </p>
 
+                                {/* Features List */}
+                                <div style={{ marginBottom: "16px" }}>
+                                    <h5 style={{ fontSize: "0.78rem", textTransform: "uppercase", color: "var(--clr-text-dim)", letterSpacing: "0.05em", marginBottom: "6px" }}>
+                                        {t.projects.features}
+                                    </h5>
+                                    <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
+                                        {proj.features.map((feat, idx) => (
+                                            <li key={idx} style={{ fontSize: "0.78rem", color: "var(--clr-text-muted)", paddingLeft: "12px", position: "relative", marginBottom: "3px" }}>
+                                                <span style={{ position: "absolute", left: 0, color: "var(--clr-primary-light)" }}>•</span>
+                                                {feat}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
                                 {/* Tags */}
-                                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "20px" }}>
+                                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "16px" }}>
                                     {proj.tags.map((tag) => (
                                         <span key={tag} style={{
-                                            padding: "3px 10px",
-                                            background: "rgba(255,255,255,0.05)",
+                                            padding: "3px 8px",
+                                            background: "rgba(255,255,255,0.04)",
                                             borderRadius: "100px",
-                                            fontSize: "0.72rem",
+                                            fontSize: "0.7rem",
                                             color: "var(--clr-text-dim)",
+                                            border: "1px solid var(--clr-border)",
                                         }}>
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
-
-                                {/* Status badge */}
-                                <div style={{ marginBottom: "20px" }}>
-                                    <span style={{
-                                        display: "inline-block",
-                                        padding: "4px 12px",
-                                        borderRadius: "100px",
-                                        fontSize: "0.72rem",
-                                        fontWeight: 600,
-                                        ...(proj.statusClass === "in-dev"
-                                            ? { background: "rgba(247,255,114,0.15)", color: "var(--clr-primary-light)", border: "1px solid rgba(247,255,114,0.25)" }
-                                            : { background: "rgba(255,255,255,0.1)", color: "#fff", border: "1px solid rgba(255,255,255,0.25)" }),
-                                    }}>
-                                        {proj.status}
-                                    </span>
-                                </div>
                             </div>
 
-                            <div style={{ position: "relative", zIndex: 1, marginTop: "auto", paddingTop: "1rem" }}>
-                                <Link href={proj.link} className="et-btn-ghost" style={{ width: "100%", justifyContent: "center", fontSize: "0.85rem", padding: "10px 16px" }}>
-                                    {proj.btnText} →
-                                </Link>
+                            <div style={{ position: "relative", zIndex: 1, marginTop: "auto", display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: "12px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+                                {/* Status Badge */}
+                                <span style={{
+                                    padding: "4px 10px",
+                                    borderRadius: "100px",
+                                    fontSize: "0.7rem",
+                                    fontWeight: 600,
+                                    textTransform: "uppercase",
+                                    ...(proj.statusClass === "completed"
+                                        ? { background: "rgba(34,197,94,0.1)", color: "#4ade80", border: "1px solid rgba(34,197,94,0.2)" }
+                                        : proj.statusClass === "in-dev"
+                                        ? { background: "rgba(234,179,8,0.1)", color: "#facc15", border: "1px solid rgba(234,179,8,0.2)" }
+                                        : { background: "rgba(99,102,241,0.1)", color: "var(--clr-primary-light)", border: "1px solid rgba(99,102,241,0.2)" }
+                                    ),
+                                }}>
+                                    {proj.status}
+                                </span>
+
+                                {/* Project Links */}
+                                <div style={{ display: "flex", gap: "10px" }}>
+                                    {proj.links.map((link) => (
+                                        <a
+                                            key={link.label}
+                                            href={link.href}
+                                            style={{
+                                                fontSize: "0.78rem",
+                                                color: "var(--clr-text)",
+                                                textDecoration: "none",
+                                                padding: "6px 12px",
+                                                border: "1px solid var(--clr-border)",
+                                                borderRadius: "6px",
+                                                transition: "all 0.25s",
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.borderColor = "var(--clr-primary)";
+                                                e.currentTarget.style.background = "rgba(99,102,241,0.05)";
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.borderColor = "var(--clr-border)";
+                                                e.currentTarget.style.background = "transparent";
+                                            }}
+                                        >
+                                            {link.label}
+                                        </a>
+                                    ))}
+                                </div>
                             </div>
                         </motion.div>
                     ))}

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { LanguageProvider } from "./components/LanguageContext";
 
 export const metadata: Metadata = {
-  title: "Edwin Thomas | IT Specialist & AI Automation Architect",
+  title: "Edwin Thomas | Aspiring Fachinformatiker für Digitale Vernetzung",
   description:
-    "Edwin Thomas – Aspiring IT Specialist, AI Automation Architect, and Digital System Builder based in Kerala, India. Pursuing Ausbildung in Germany.",
-  keywords: ["Edwin Thomas", "IT Specialist", "AI Automation", "Digital Networking", "Ausbildung", "Portfolio"],
+    "Edwin Thomas – Aspiring IT Infrastructure and Digital Networking Professional with practical experience in Linux, Docker, GitHub, web deployment, and automation-focused projects.",
+  keywords: ["Edwin Thomas", "Fachinformatiker für Digitale Vernetzung", "IT Specialist", "Networking", "Ausbildung", "Linux", "Docker", "Portfolio"],
 };
 
 export default function RootLayout({
@@ -20,8 +21,11 @@ export default function RootLayout({
         margin: 0,
         padding: 0,
       }}>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
 }
+

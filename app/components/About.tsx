@@ -2,19 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
-
-const identityCards = [
-    { icon: "🧠", title: "System Thinker", desc: "Designs scalable, interconnected ecosystems with long-term vision" },
-    { icon: "⚙️", title: "Automation Builder", desc: "Builds automated systems that operate with minimal human intervention" },
-    { icon: "🚀", title: "Entrepreneurial Thinker", desc: "Risk-tolerant innovator with an independent research mindset" },
-    { icon: "🌱", title: "Tech + Energy Integrator", desc: "Merges renewable energy and smart tech for future-ready infrastructure" },
-];
-
-const infoItems = [
-    { icon: "📍", text: "Perumbavoor, Kerala, India" },
-    { icon: "🗣️", text: "English (Fluent) · German (B2)" },
-    { icon: "🎯", text: "Fachinformatiker für Digitale Vernetzung" },
-];
+import { useLanguage } from "./LanguageContext";
 
 function useReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -32,15 +20,33 @@ function useReveal() {
 }
 
 export default function About() {
+    const { t } = useLanguage();
     const leftRef = useReveal();
     const rightRef = useReveal();
+
+    const identityCards = [
+        { icon: "🧠", title: t.about.cards.system.title, desc: t.about.cards.system.desc },
+        { icon: "⚙️", title: t.about.cards.automation.title, desc: t.about.cards.automation.desc },
+        { icon: "🚀", title: t.about.cards.learner.title, desc: t.about.cards.learner.desc },
+        { icon: "🌐", title: t.about.cards.networking.title, desc: t.about.cards.networking.desc },
+    ];
+
+    const infoItems = [
+        { icon: "📍", text: t.about.info.location },
+        { icon: "🎓", text: t.about.info.education },
+        { icon: "🗣️", text: t.about.info.languages },
+        { icon: "🎯", text: t.about.info.targetRole },
+    ];
 
     return (
         <section className="et-section" id="about">
             <div className="et-container">
-                <div className="et-section-label">Who I Am</div>
+                <div className="et-section-label">{t.about.label}</div>
                 <h2 className="et-section-title">
-                    Antigravity <span className="et-gradient-text">Mindset</span>
+                    {t.about.title.split(" ").slice(0, 2).join(" ")}{" "}
+                    <span className="et-gradient-text">
+                        {t.about.title.split(" ").slice(2).join(" ")}
+                    </span>
                 </h2>
 
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "start" }}
@@ -49,11 +55,13 @@ export default function About() {
                     {/* Left: Bio text */}
                     <div ref={leftRef} className="et-reveal">
                         <p style={{ fontSize: "1.15rem", fontWeight: 500, color: "var(--clr-text)", marginBottom: "16px", lineHeight: "1.6" }}>
-                            I am an aspiring IT specialist focused on digital networking, AI automation, and scalable infrastructure systems.
+                            {t.about.lead}
+                        </p>
+                        <p style={{ color: "var(--clr-text-muted)", marginBottom: "16px", lineHeight: "1.8" }}>
+                            {t.about.bio1}
                         </p>
                         <p style={{ color: "var(--clr-text-muted)", marginBottom: "28px", lineHeight: "1.8" }}>
-                            With B2-level German proficiency and a strong interest in server architecture, I aim to build intelligent ecosystems
-                            that combine networking, AI, renewable energy, and automation into future-ready digital enterprises.
+                            {t.about.bio2}
                         </p>
                         <p style={{
                             fontStyle: "italic",
@@ -64,12 +72,11 @@ export default function About() {
                             lineHeight: "1.7",
                             fontSize: "0.95rem",
                         }}>
-                            "Just as gravity keeps systems grounded, innovation breaks limitations. My goal is to design digital systems
-                            that operate beyond traditional constraints."
+                            {t.about.quote}
                         </p>
                         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                            {infoItems.map((item) => (
-                                <div key={item.text} style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--clr-text-muted)", fontSize: "0.9rem" }}>
+                            {infoItems.map((item, idx) => (
+                                <div key={idx} style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--clr-text-muted)", fontSize: "0.9rem" }}>
                                     <span>{item.icon}</span>
                                     <span>{item.text}</span>
                                 </div>

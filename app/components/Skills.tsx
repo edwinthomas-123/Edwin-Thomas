@@ -1,29 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const skillCategories = [
-    {
-        icon: "🌐",
-        title: "Digital Networking",
-        tags: ["Server Architecture", "Infrastructure Design", "Network Systems", "Cloud + Local Hybrid Hosting", "Docker (Containerization)"],
-    },
-    {
-        icon: "🤖",
-        title: "AI & Automation",
-        tags: ["AI Video Generation Pipelines", "Multi-Channel Content Systems", "Content Repurposing (Long→Short)", "Local AI Model Deployment", "GPU-Based AI Training"],
-    },
-    {
-        icon: "🖥️",
-        title: "Server Infrastructure",
-        tags: ["24/7 Personal Server Environments", "Client Website Hosting", "Automation Engines", "Data Storage Architecture", "AI Execution Environments"],
-    },
-    {
-        icon: "💪",
-        title: "Core Strengths",
-        tags: ["Deep Tech Curiosity", "Strategic Long-term Planning", "Independent Research", "Entrepreneurial Thinking", "Risk-Tolerant Innovation"],
-    },
-];
+import { useLanguage } from "./LanguageContext";
 
 const cardVariants = {
     hidden: { opacity: 0, y: 28 },
@@ -35,12 +13,40 @@ const cardVariants = {
 };
 
 export default function Skills() {
+    const { t } = useLanguage();
+
+    const skillCategories = [
+        {
+            icon: "🖥️",
+            title: t.skills.infraTitle,
+            tags: ["Linux", "Docker", "Server Hosting", "Git", "GitHub", "Website Deployment"],
+        },
+        {
+            icon: "🌐",
+            title: t.skills.webTitle,
+            tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+        },
+        {
+            icon: "⚙️",
+            title: t.skills.aiTitle,
+            tags: ["AI Workflow Design", "Content Automation", "Process Optimization", "AI Tool Integration"],
+        },
+        {
+            icon: "🧠",
+            title: t.skills.learningTitle,
+            tags: ["Home Lab Infrastructure", "Network Administration", "Server Management", "VPN Technologies", "Digital Networking"],
+        },
+    ];
+
     return (
         <section className="et-section et-section-dark" id="skills">
             <div className="et-container">
-                <div className="et-section-label">What I Know</div>
+                <div className="et-section-label">{t.skills.label}</div>
                 <h2 className="et-section-title">
-                    Technical <span className="et-gradient-text">Expertise</span>
+                    {t.skills.title.split(" ").slice(0, 1).join(" ")}{" "}
+                    <span className="et-gradient-text">
+                        {t.skills.title.split(" ").slice(1).join(" ")}
+                    </span>
                 </h2>
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}
@@ -73,14 +79,15 @@ export default function Skills() {
                             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
                                 <div style={{
                                     width: "42px", height: "42px",
-                                    display: "flex", alignItems: "center", justifyContent: "center",
+                                    display: "flex", alignItems: "center", justifyItems: "center", justifyContent: "center",
                                     fontSize: "1.2rem",
                                     background: "rgba(99,102,241,0.1)",
                                     borderRadius: "var(--radius-sm)",
+                                    flexShrink: 0,
                                 }}>
                                     {cat.icon}
                                 </div>
-                                <h3 style={{ fontFamily: "var(--font-main)", fontSize: "1.05rem", fontWeight: 600 }}>
+                                <h3 style={{ fontFamily: "var(--font-main)", fontSize: "1.05rem", fontWeight: 600, color: "var(--clr-text)" }}>
                                     {cat.title}
                                 </h3>
                             </div>
