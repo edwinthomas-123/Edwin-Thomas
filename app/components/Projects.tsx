@@ -13,7 +13,7 @@ const cardVariants = {
 };
 
 export default function Projects() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
 
     const projectsList = [
         {
@@ -26,7 +26,7 @@ export default function Projects() {
             statusClass: "completed",
             features: ["Mobile Responsive UI", "Business presentation layout", "Contact Form integration", "Fast load optimizations"],
             links: [
-                { label: t.projects.liveDemo, href: "https://bake-and-bite.vercel.app/" },
+                { label: t.projects.liveDemo, href: "https://bake-and-bite.vercel.app/", alert: "" },
             ],
         },
         {
@@ -39,8 +39,8 @@ export default function Projects() {
             statusClass: "completed",
             features: ["Dynamic i18n Switching", "Scroll Canvas integration", "Tailwind responsive styling", "Docker ready"],
             links: [
-                { label: "GitHub", href: "https://github.com" },
-                { label: t.projects.liveDemo, href: "#" },
+                { label: "GitHub", href: "https://github.com", alert: "" },
+                { label: t.projects.liveDemo, href: "#", alert: "" },
             ],
         },
         {
@@ -53,8 +53,14 @@ export default function Projects() {
             statusClass: "in-dev",
             features: [t.projects.proj3.workflow, "API error handling", "Scheduled tasks execution", "Workflow logging dashboard"],
             links: [
-                { label: "GitHub", href: "https://github.com" },
-                { label: t.projects.liveDemo, href: "https://autovid-mu.vercel.app/" },
+                { label: "GitHub", href: "https://github.com", alert: "" },
+                { 
+                    label: t.projects.liveDemo, 
+                    href: "https://autovid-mu.vercel.app/",
+                    alert: language === "de"
+                        ? "App in Arbeit: Da derzeit nur das Frontend online gehostet wird, sind die Backend-Automatisierungsfunktionen inaktiv."
+                        : "App in progress: Since only the frontend is hosted, the backend automation features will not work."
+                },
             ],
         },
         {
@@ -218,6 +224,13 @@ export default function Projects() {
                                         <a
                                             key={link.label}
                                             href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={(e) => {
+                                                if (link.alert) {
+                                                    alert(link.alert);
+                                                }
+                                            }}
                                             style={{
                                                 fontSize: "0.78rem",
                                                 color: "var(--clr-text)",
