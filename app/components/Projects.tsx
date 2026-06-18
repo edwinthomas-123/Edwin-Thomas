@@ -54,6 +54,7 @@ export default function Projects() {
             features: [t.projects.proj3.workflow, "API error handling", "Scheduled tasks execution", "Workflow logging dashboard"],
             links: [
                 { label: "GitHub", href: "https://github.com" },
+                { label: t.projects.liveDemo, href: "https://autovid-mu.vercel.app/" },
             ],
         },
         {
