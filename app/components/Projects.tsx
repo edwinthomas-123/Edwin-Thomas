@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "./LanguageContext";
 
 const cardVariants = {
@@ -14,6 +15,7 @@ const cardVariants = {
 
 export default function Projects() {
     const { t, language } = useLanguage();
+    const [activeAlert, setActiveAlert] = useState<{ text: string; href: string } | null>(null);
 
     const projectsList = [
         {
@@ -58,8 +60,8 @@ export default function Projects() {
                     label: t.projects.liveDemo, 
                     href: "https://autovid-mu.vercel.app/",
                     alert: language === "de"
-                        ? "App in Arbeit: Da derzeit nur das Frontend online gehostet wird, sind die Backend-Automatisierungsfunktionen inaktiv."
-                        : "App in progress: Since only the frontend is hosted, the backend automation features will not work."
+                        ? "App in Arbeit: Da derzeit nur das Frontend online gehostet wird, sind die Backend-Automatisierungsfunktionen inaktiv. Möchten Sie trotzdem zur Live-Demo fortfahren?"
+                        : "App in progress: Since only the frontend is hosted, the backend automation features will not work. Do you want to proceed to the live demo?"
                 },
             ],
         },
@@ -228,7 +230,8 @@ export default function Projects() {
                                             rel="noopener noreferrer"
                                             onClick={(e) => {
                                                 if (link.alert) {
-                                                    alert(link.alert);
+                                                    e.preventDefault();
+                                                    setActiveAlert({ text: link.alert, href: link.href });
                                                 }
                                             }}
                                             style={{
@@ -258,6 +261,111 @@ export default function Projects() {
                     ))}
                 </div>
             </div>
+
+            <AnimatePresence>
+                {activeAlert && (
+                    <div style={{
+                        position: "fixed",
+                        top: 0, left: 0, right: 0, bottom: 0,
+                        backgroundColor: "rgba(5, 8, 22, 0.8)",
+                        backdropFilter: "blur(8px)",
+                        zIndex: 9999,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "20px",
+                    }}>
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.2 }}
+                            style={{
+                                background: "rgba(15, 23, 42, 0.9)",
+                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                                borderRadius: "16px",
+                                padding: "28px",
+                                maxWidth: "440px",
+                                width: "100%",
+                                boxShadow: "0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)",
+                                color: "var(--clr-text)",
+                                textAlign: "center",
+                            }}
+                        >
+                            <div style={{ fontSize: "2.5rem", marginBottom: "12px" }}>⚠️</div>
+                            <h4 style={{ 
+                                fontFamily: "var(--font-main)", 
+                                fontSize: "1.2rem", 
+                                fontWeight: 700, 
+                                marginBottom: "12px" 
+                            }}>
+                                {language === "de" ? "Projekt-Hinweis" : "Project Notice"}
+                            </h4>
+                            <p style={{ 
+                                fontSize: "0.85rem", 
+                                color: "var(--clr-text-muted)", 
+                                lineHeight: "1.6", 
+                                marginBottom: "24px" 
+                            }}>
+                                {activeAlert.text}
+                            </p>
+                            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+                                <button 
+                                    onClick={() => setActiveAlert(null)}
+                                    style={{
+                                        padding: "8px 16px",
+                                        borderRadius: "6px",
+                                        border: "1px solid var(--clr-border)",
+                                        background: "transparent",
+                                        color: "var(--clr-text)",
+                                        cursor: "pointer",
+                                        fontSize: "0.82rem",
+                                        transition: "all 0.2s",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.background = "transparent";
+                                    }}
+                                >
+                                    {language === "de" ? "Abbrechen" : "Cancel"}
+                                </button>
+                                <a 
+                                    href={activeAlert.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setActiveAlert(null)}
+                                    style={{
+                                        padding: "8px 16px",
+                                        borderRadius: "6px",
+                                        border: "none",
+                                        background: "var(--grad-main)",
+                                        color: "#fff",
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                        fontSize: "0.82rem",
+                                        fontWeight: 600,
+                                        transition: "all 0.2s",
+                                        boxShadow: "0 4px 12px rgba(99, 102, 241, 0.3)",
+                                        display: "inline-block",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.transform = "translateY(-1px)";
+                                        e.currentTarget.style.boxShadow = "0 6px 16px rgba(99, 102, 241, 0.4)";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.transform = "none";
+                                        e.currentTarget.style.boxShadow = "0 4px 12px rgba(99, 102, 241, 0.3)";
+                                    }}
+                                >
+                                    {language === "de" ? "Website betreten" : "Enter Website"}
+                                </a>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
 
             <style>{`
         @media (max-width: 900px) {
